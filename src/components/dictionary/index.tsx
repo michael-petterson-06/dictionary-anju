@@ -69,6 +69,7 @@ export default function Dictionary() {
       <input
         className="bg-[rgba(244,244,244,1)] w-full px-5 py-6  rounded-lg font-bold outline-none"
         onChange={(event)=> setInputValue(event.target.value)}
+        placeholder="Search a word"
       />
 
       <SlMagnifier
