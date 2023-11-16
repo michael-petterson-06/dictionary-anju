@@ -3,28 +3,34 @@
 import { useEffect, useState } from "react";
 import { SlMagnifier } from "react-icons/sl";
 import DictionaryInfo from "../dictionary-info";
+import { DictionaryInfo as DictionaryType } from "@/types";
+import Swal from "sweetalert2";
 
-type Definition = {
-
-}
-
-// type DictionaryInfo = {
-//   partOfSpeech: string,
-//   definitions: 
-// }
 
 export default function Dictionary() {
 
   const [word, setWord] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [meanings, setMeanings] = useState([]);
-
+  const [meanings, setMeanings] = useState<DictionaryType[]>([]);
+  const [errorMsg, setErrorMsg] = useState('');
 
   // https://api.dictionaryapi.dev/api/v2/entries/en/<word>
   async function  handleSearchClick() {
     
-    setWord(inputValue)
-    
+    if(inputValue.length > 0) {
+      
+      setWord(inputValue)
+
+    }
+     else {
+
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The input is empty!",
+      });
+
+     }
   }
 
   
@@ -39,7 +45,12 @@ export default function Dictionary() {
         const response = await data.json();
         setMeanings(response[0].meanings);
       } catch (error) {
-        alert('Error')
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please, type an existing word.",
+        });
+        setMeanings([]);
       }
       
     }
@@ -48,12 +59,9 @@ export default function Dictionary() {
       fetchData()
     }
 
-  }, [word])
+  }, [word]);
 
-  
-
-
-    
+      
   return (
     <>
       <section className="relative flex items-center w-full mx-auto">
@@ -70,7 +78,7 @@ export default function Dictionary() {
 
     </section>
 
-    <h1>{word}</h1>
+    <h1 className="text-4xl my-10 font-bold">{word}</h1>
 
     {meanings && meanings.map((meaning, index) => (
       <DictionaryInfo
