@@ -5,7 +5,7 @@ export default function NavBar() {
 
   return (
 
-    <header className="h-20 flex items-center">
+    <header className="h-28 flex items-center">
       <Image
          src={ bookSvg }
          width='1000'
