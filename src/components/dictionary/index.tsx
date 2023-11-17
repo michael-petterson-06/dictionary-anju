@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 export default function Dictionary() {
 
   const [word, setWord] = useState('');
+  const [load, setLoad] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [meanings, setMeanings] = useState<DictionaryType[]>([]);
  
@@ -39,6 +40,7 @@ export default function Dictionary() {
       const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
       
       try {
+        setLoad(true);
         const data = await fetch(url);
         const response = await data.json();
         setMeanings(response[0].meanings);
@@ -50,6 +52,7 @@ export default function Dictionary() {
         });
         setMeanings([]);
       }
+      setLoad(false);
       
     }
     
@@ -78,7 +81,7 @@ export default function Dictionary() {
       </section>
 
       <h1 className="text-4xl my-10 font-bold">{word}</h1>
-
+      {load && <p className="font-bold mb-5 text-xl">Loading...</p>}
       {meanings && meanings.map((meaning, index) => (
         <DictionaryInfo
           key={index}
@@ -86,7 +89,8 @@ export default function Dictionary() {
           definitions={meaning.definitions}
           synonyms={meaning.synonyms}
         />
-      ))}
+      ))} 
+    
     </>
   )
 }
