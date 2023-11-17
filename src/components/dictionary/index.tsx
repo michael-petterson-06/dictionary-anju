@@ -12,9 +12,7 @@ export default function Dictionary() {
   const [word, setWord] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [meanings, setMeanings] = useState<DictionaryType[]>([]);
-  const [errorMsg, setErrorMsg] = useState('');
-
-  // https://api.dictionaryapi.dev/api/v2/entries/en/<word>
+ 
   async function  handleSearchClick() {
     
     if(inputValue.length > 0) {
@@ -22,7 +20,7 @@ export default function Dictionary() {
       setWord(inputValue)
 
     }
-     else {
+    else {
 
       Swal.fire({
         icon: "error",
@@ -66,30 +64,29 @@ export default function Dictionary() {
     <>
       <section className="relative flex items-center w-full mx-auto">
     
-      <input
-        className="bg-[rgba(244,244,244,1)] w-full px-5 py-6  rounded-lg font-bold outline-none"
-        onChange={(event)=> setInputValue(event.target.value)}
-        placeholder="Search a word"
-      />
+        <input
+          className="bg-[rgba(244,244,244,1)] w-full px-5 py-6  rounded-lg font-bold outline-none"
+          onChange={(event)=> setInputValue(event.target.value)}
+          placeholder="Search a worder"
+        />
 
-      <SlMagnifier
-        className="absolute right-10 top-7 text-xl font-bold text-blue-600 cursor-pointer"
-        onClick={() => handleSearchClick()}
-      />
+        <SlMagnifier
+          className="absolute right-10 top-7 text-xl font-bold text-blue-600 cursor-pointer"
+          onClick={() => handleSearchClick()}
+        />
 
-    </section>
+      </section>
 
-    <h1 className="text-4xl my-10 font-bold">{word}</h1>
+      <h1 className="text-4xl my-10 font-bold">{word}</h1>
 
-    {meanings && meanings.map((meaning, index) => (
-      <DictionaryInfo
-        key={index}
-        partOfSpeech={meaning.partOfSpeech}
-        definitions={meaning.definitions}
-        synonyms={meaning.synonyms}
-      />
-    ))}
-
+      {meanings && meanings.map((meaning, index) => (
+        <DictionaryInfo
+          key={index}
+          partOfSpeech={meaning.partOfSpeech}
+          definitions={meaning.definitions}
+          synonyms={meaning.synonyms}
+        />
+      ))}
     </>
   )
 }
