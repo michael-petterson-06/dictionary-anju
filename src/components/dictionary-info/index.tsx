@@ -17,7 +17,7 @@ export default function DictionaryInfo({
       </ul>
       <p className="text-[rgb(153, 153, 153)] opacity-40 mb-8 inline">Synonyms</p>
       {synonyms.map((synonym, index) => (
-        <span className="text-blue-700 ml-4"key={index}>{synonym}</span>
+        <span className="text-blue-700 ml-4 dark:text-blue-500"key={index}>{synonym}</span>
       
       ))}
     </section>

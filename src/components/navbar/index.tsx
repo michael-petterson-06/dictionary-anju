@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import bookSvg from './images/book.svg';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Switch } from '@headlessui/react'
 import { GoMoon, GoSun } from "react-icons/go";
 import { useTheme } from "next-themes"; 
@@ -31,13 +31,21 @@ function MyToggle({themeMode, setThemeMode}:{ themeMode?: string, setThemeMode:(
 
 export default function NavBar() {
 
+  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true)
+  },[]) 
+
+  if(!mounted) return null
 
   function changeEnabledStatus() {
 
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
 
+  console.log(theme)
   return (
 
     <header className="h-28 flex items-center place-content-between">

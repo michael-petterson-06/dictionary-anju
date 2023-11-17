@@ -65,7 +65,7 @@ export default function Dictionary() {
       <section className="relative flex items-center w-full mx-auto">
     
         <input
-          className="bg-[rgba(244,244,244,1)] w-full px-5 py-6  rounded-lg font-bold outline-none"
+          className="bg-[rgba(244,244,244,1)] w-full px-5 py-6  rounded-lg font-bold outline-none dark:text-gray-900"
           onChange={(event)=> setInputValue(event.target.value)}
           placeholder="Search a worder"
         />
